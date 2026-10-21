@@ -1,0 +1,36 @@
+plugins {
+    id 'com.android.application'
+}
+android {
+    namespace 'app.tradyar'
+    compileSdk 34
+    defaultConfig {
+        applicationId "app.tradyar"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+        def marketApplicationId = "ir.mservices.market"
+        def marketBindAddress = "ir.mservices.market.InAppBillingService.BIND"
+        manifestPlaceholders = [
+            marketApplicationId: "${marketApplicationId}",
+            marketBindAddress  : "${marketBindAddress}",
+            marketPermission   : "${marketApplicationId}.BILLING"
+        ]
+        buildConfigField "String", "IAB_PUBLIC_KEY", "\"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC690jqkiBVMKuEhtalh6QrE5EjQmv5kwV1gHEy+zOtIxQUdtAp24uGcNLv5DCgQFAxs1FzSnzeBBSZldZc51SuwzSC3GfYH16B4AfRnWQhPTecKtH6q18taBUB8pgJRsoXmCbr8ZyDU7kHP51mXzTxQMSZ0plByDnw+MRvFrUjtwIDAQAB\""
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+dependencies {
+    implementation 'com.github.myketstore:myket-billing-client:1.6'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+}
